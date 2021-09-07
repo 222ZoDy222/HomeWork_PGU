@@ -66,5 +66,5 @@ if(isinstance(Result, list)):
   for i in range(len(Result)):
     print(" | ",Result[i].ID," | \t",Result[i].FirstName," \t\t|\t\t ",Result[i].LastName," \t\t| ",Result[i].Age," | ")
 else:
-  print("Такой пользователь не найдет")
+  print("Такой пользователь не найден")
 input()
