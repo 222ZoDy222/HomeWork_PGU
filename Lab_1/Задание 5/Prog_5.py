@@ -51,7 +51,6 @@ def MainFunc():
           if(countError <= len(Array2)*100):
             countError += 1
           else:
-            #del Array2[0]
             return 0
           break
       count-=1
