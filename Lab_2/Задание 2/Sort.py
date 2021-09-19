@@ -32,26 +32,31 @@ def quickSort(nums):
         return quickSort(s_nums) + e_nums + quickSort(m_nums)
 
 data1 = []
-for i in range(100000):
-    data1.append(random.randint(0,10000))
-for i in range(100000):
+for i in range(int(1000000/2)):
     data1.append(i)
-for i in range(100000):
-    data1.append(100000 - i)
+for i in range(int(1000000/2)):
+    data1.append(100000-i)
+
+
+
 data2 = data1.copy()
 data3 = data1.copy()
 
+print('\n')
 #print(data1[5],'',data2[5],'',data3[5])
+print("Сортировка Шелла")
 start_time = time.time() 
 shellSort(data1,len(data1))
 print("--- %s seconds ---" % (time.time() - start_time))
 
-
+print('\n')
+print("Быстрая сортировка")
 start_time = time.time() 
 quickSort(data2)
 print("--- %s seconds ---" % (time.time() - start_time))
 
-
+print('\n')
+print("Стандартная сортировка python")
 start_time = time.time()
 data3.sort()
 print("--- %s seconds ---" % (time.time() - start_time))

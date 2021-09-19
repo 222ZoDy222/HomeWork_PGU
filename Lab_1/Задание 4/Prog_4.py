@@ -3,6 +3,7 @@ from random import randint
 Arr = []
 count = 0
 Col = []
+
 for i in range(6):
 	Arr.append([])
 	for j in range(6):
