@@ -37,6 +37,8 @@ SIZE_MATRIX = 4000
 Main()
 SIZE_MATRIX = 10000
 Main()
+SIZE_MATRIX = 100000
+Main()
 
 
 
