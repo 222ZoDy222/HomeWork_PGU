@@ -23,6 +23,7 @@ for i in range(N1):
 	print('\n')
 print('\n'*3)
 # № 2
+'''
 for i in range(N2):
 	M2.append([])
 	for j in range(N2):
@@ -36,6 +37,8 @@ for i in range(N1):
 		print(M2[i][j],end='\t')
 	print('\n')
 print('\n'*3)
+'''
+'''
 # Преобразование в список смежности
 List_S1 = []
 print("Первый список смежности:\n")
@@ -64,6 +67,29 @@ for i in range(N2):
 	for j in range(len(List_S2[i])):
 		print(List_S2[i][j],end=' ')
 	print('\n')	
+print('\n'*3)
+'''
+'''------------------------------------------------------ 2 задание
+№ 1 - Отождествление вершин
+'''
+a1 = int(input('Первая вершина')) - 1
+a2 = int(input('Вторая вершина')) - 1
+
+print(M1[a1])
+print(M1[a2])
+Col = []
+for i in range(N1):
+	print(M1[a1][i],M1[a2][i])
+	if(M1[a1][i] == 1 or M1[a2][i] == 1):
+		Col.append(1)
+	else:
+		Col.append(0)
+print(Col)
+
+for i in range(N1):
+	for j in range(N1):
+		print(M1[i][j],end='\t')
+	print('\n')
 print('\n'*3)
 
 
