@@ -74,26 +74,51 @@ print('\n'*3)
 '''
 a1 = int(input('Первая вершина')) - 1
 a2 = int(input('Вторая вершина')) - 1
+print(a1)
+print(a2)
+if(a1 > a2):
+	Max = a1
+	Min = a2
+else:
+	Max = a2
+	Min = a1
 
-print(M1[a1])
-print(M1[a2])
-Col = []
+print(Max)
+G = []
 for i in range(N1):
-	print(M1[a1][i],M1[a2][i])
-	if(M1[a1][i] == 1 or M1[a2][i] == 1):
-		Col.append(1)
-	else:
-		Col.append(0)
-print(Col)
+	G.append([])
+	for j in range(N1):
+		G[i].append(0)
+'''
+for i in range(N1):
+	for j in range(N1):
+		print(G[i][j],end='\t')
+	print('\n')
+print('\n'*3)
+'''
+'''
+for i in range(N1):
+	for j in range(N1):
+		if(i < Max or j < Max):
+			G[i][j] = M1[i][j]
+		if(i > Max or j > Max):
+			G[i-1][j-1] = M1[i][j]
+		if(j==Max or i==Max):
+			G[i][Min] = M1[i][j]
+			G[Min][j] = M1[i][j]
 
 for i in range(N1):
 	for j in range(N1):
-		print(M1[i][j],end='\t')
+		if (i==N1-1 or j==N1-1):
+			G[i][j] = "|"
+'''
+
+
+for i in range(len(G)):
+	for j in range(len(G[i])):
+		print(G[i][j],end='\t')
 	print('\n')
 print('\n'*3)
-
-
-
 
 
 
