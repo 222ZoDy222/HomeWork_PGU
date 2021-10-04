@@ -23,7 +23,7 @@ for i in range(N1):
 	print('\n')
 print('\n'*3)
 # № 2
-'''
+
 for i in range(N2):
 	M2.append([])
 	for j in range(N2):
@@ -31,14 +31,14 @@ for i in range(N2):
 		if(i == j):
 			M2[i][j] = 0
 		
-for i in range(N1):
+for i in range(N2):
 	for j in range(N2):
 		M2[i][j] = M2[j][i]
 		print(M2[i][j],end='\t')
 	print('\n')
 print('\n'*3)
-'''
-'''
+
+
 # Преобразование в список смежности
 List_S1 = []
 print("Первый список смежности:\n")
@@ -68,91 +68,99 @@ for i in range(N2):
 		print(List_S2[i][j],end=' ')
 	print('\n')	
 print('\n'*3)
-'''
+
+
+M11 = M1.copy()
+M22 = M2.copy()
+
+
 '''------------------------------------------------------ 2 задание
 № 1 - Отождествление вершин
 '''
-a1 = int(input('Первая вершина')) - 1
-a2 = int(input('Вторая вершина')) - 1
+print("№1\n a) Отождествление вершин\n")
 
-if(a1 > a2):
-	Max = a1
-	Min = a2
-else:
-	Max = a2
-	Min = a1
+a1 = int(input('Первая вершина : ')) - 1
+a2 = int(input('Вторая вершина : ')) - 1
 
-G = []
-for i in range(N1):
-	G.append(M1[Min][i] + M1[Max][i])
-	if(G[i] == 2):
-		G[i] = 1
+def identification(M1,a1,a2):
+	
+	if(a1 > a2):
+		Max = a1
+		Min = a2
+	else:
+		Max = a2
+		Min = a1
 
-for i in range(N1):
-	M1[Min][i] = G[i]
-	M1[i][Min] = G[i]
+	G = []
+	for i in range(N1):
+		G.append(M1[Min][i] + M1[Max][i])
+		if(G[i] == 2):
+			G[i] = 1
 
-for i in range(N1):
-	for j in range(N1):
-		print(M1[i][j],end='\t')
+	for i in range(N1):
+		M1[Min][i] = G[i]
+		M1[i][Min] = G[i]
+
+	for i in range(N1-1):
+		for j in range(N1-1):
+			if(i >= Max):
+				M1[i][j] = M1[i+1][j]
+			elif(j >= Max):
+				M1[i][j] = M1[i][j + 1]
+			if(i >= Max and j >= Max):
+				M1[i][j] = M1[i + 1][j + 1]
+
+
+	return M1
+
+
+G = identification(M1,a1,a2)
+for i in range(len(G)-1):
+	for j in range(len(G)-1):
+		print(G[i][j],end="\t")
+	print("\n")
+print("\n"*3)
+
+print("№1\n б) Стягивание вершин\n")
+
+M1 = M11.copy()
+def constriction(M1,a1,a2):
+	if(M1[a1][a2] != 1):
+		print("Выберите другие вершины, эти не связанные")
+		return 0
+	F = identification(M1,a1,a2)
+	for i in range(len(F)-1):
+		for j in range(len(F)-1):
+			if(i == j):
+				F[i][j] = 0
+	return F
+F=0
+while(F==0):
+	a1 = int(input('Первая вершина : ')) - 1
+	a2 = int(input('Вторая вершина : ')) - 1
+	F = constriction(M1,a1,a2)
+for i in range(len(F)-1):
+	for j in range(len(F)-1):
+		print(F[i][j],end="\t")
+	print("\n")
+print("\n"*3)
+
+print("№1\n в) Расщепление вершин во сторой матрице\n")
+
+a1 = int(input('Расщепить вершину под номером : \n')) - 1
+
+
+M2.append(M2[a1])
+for i in range(len(M2)-1):
+	M2[i].append(M2[i][a1])
+
+M2[a1][len(M2)-1] = M2[len(M2)-1][a1] = 1
+
+for i in range(len(M2)):
+	for j in range(len(M2[i])):
+		print(M2[i][j],end='\t')
 	print('\n')
 print('\n'*3)
-
-for i in range(N1-1):
-	for j in range(N1-1):
-		if(i >= Max):
-			M1[i][j] = M1[i+1][j]
-		elif(j >= Max):
-			M1[i][j] = M1[i][j + 1]
-		if(i >= Max and j >= Max):
-			M1[i][j] = M1[i + 1][j + 1]
-
-
-
-for i in range(N1-1):
-	for j in range(N1-1):
-		print(M1[i][j],end='\t')
-	print('\n')
-print('\n'*3)
-
-
-'''
-for i in range(N1):
-	for j in range(N1):
-		print(G[i][j],end='\t')
-	print('\n')
-print('\n'*3)
-'''
-'''
-for i in range(N1):
-	for j in range(N1):
-		if(i < Max or j < Max):
-			G[i][j] = M1[i][j]
-		if(i > Max or j > Max):
-			G[i-1][j-1] = M1[i][j]
-		if(j==Max or i==Max):
-			G[i][Min] = M1[i][j]
-			G[Min][j] = M1[i][j]
-
-for i in range(N1):
-	for j in range(N1):
-		if (i==N1-1 or j==N1-1):
-			G[i][j] = "|"
-'''
-
-'''
-for i in range(len(G)):
-	for j in range(len(G[i])):
-		print(G[i][j],end='\t')
-	print('\n')
-print('\n'*3)
-'''
-
-
-
-
-
-
 
 
 
