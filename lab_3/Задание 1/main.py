@@ -149,12 +149,16 @@ print("№1\n в) Расщепление вершин во сторой матр
 
 a1 = int(input('Расщепить вершину под номером : \n')) - 1
 
-
-M2.append(M2[a1])
+M2.append(M2[a1].copy())
 for i in range(len(M2)-1):
 	M2[i].append(M2[i][a1])
 
 M2[a1][len(M2)-1] = M2[len(M2)-1][a1] = 1
+
+if(M2[a1][a1]==1):
+	M2[len(M2)-1].append(1)
+else:
+	M2[len(M2)-1].append(0)
 
 for i in range(len(M2)):
 	for j in range(len(M2[i])):
