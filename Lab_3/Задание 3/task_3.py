@@ -46,24 +46,79 @@ def CreateTwoMatrix():
 
 def combineGraphs(M1,M2):
 
+	if(M1 < M2):
+		M1,M2 = M2,M1
+	G = []
 	for i in range(len(M1)):
-		if(M1[i] == M2[i]):
-			continue
-		M1.append(M2[i])
+		G.append([])
+		for j in range(len(M1)):
+			try:
+				if(M1[i][j] + M2[i][j] == 2):
+					G[i].append(1)
+				else:
+					G[i].append(M1[i][j] + M2[i][j])
+			except IndexError:
+				G[i].append(M1[i][j])
+	return G
 		
 
-
+def confluence(M1,M2):
+	if(M1 < M2):
+		M1,M2 = M2,M1
+	G = []
+	for i in range(len(M1)):
+		G.append([])
+		for j in range(len(M1[i])):
+			try:
+				G[i].append(M1[i][j] & M2[i][j])
+			except IndexError:
+				G[i].append(0)
 			
+	return G
+	
+def annularSum(M1,M2):
+	if(M1 < M2):
+		M1,M2 = M2,M1
+	G = []
+	for i in range(len(M1)):
+		G.append([])
+		for j in range(len(M1[i])):
+			try:
+				if((M1[i][j] == 1 and M2[i][j] == 0) or (M2[i][j] == 1 and M1[i][j] == 0)):
+					G[i].append(1)
+				else:
+					G[i].append(0)
+			except IndexError:
+				if(M1[i][j] == 1):
+					G[i].append(1)
+				else:
+					G[i].append(0)
+			
+	return G
+
 
 CreateTwoMatrix()
-combineGraphs(M1,M2)
+# Объединение графов
+G = combineGraphs(M1,M2)
 
+# Пересечение
+G = []
+G = confluence(M1,M2)
 
+# Кольцевая сумма
+G = []
+G = annularSum(M1,M2)
 
-for i in range(len(M1)):
-	for j in range(len(M1[i])):
-		print(M1[i][j],end='\t')
+for i in range(len(G)):
+	for j in range(len(G[i])):
+		print(G[i][j],end='\t')
 	print('\n')
 print('\n'*3)
+
+
+
+
+
+
 
 
