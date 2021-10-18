@@ -57,10 +57,12 @@ def Decart(M1,M2):
 			count += 1
 			for ii in range(len(M1)):
 				for jj in range(len(M2)):
-					if(i == ii and j == jj):
+					if(i == jj and j == ii):
 						G[count].append(0)
-					elif(i == ii or j == jj):
-						G[count].append(1)
+					elif(i == ii):
+						G[count].append(M2[j][jj])
+					elif(j == jj):
+						G[count].append(M1[i][ii])
 					else:
 						G[count].append(0)
 
