@@ -46,39 +46,46 @@ def CreateTwoMatrix():
 
 def combineGraphs(M1,M2):
 
-	if(M1 < M2):
-		M1,M2 = M2,M1
+	if(len(M1) < len(M2)):
+		M1, M2 = M2, M1
 	G = []
 	for i in range(len(M1)):
 		G.append([])
 		for j in range(len(M1)):
 			try:
-				if(M1[i][j] + M2[i][j] == 2):
+				if(M1[i][j] or M2[i][j]):
 					G[i].append(1)
 				else:
-					G[i].append(M1[i][j] + M2[i][j])
+					G[i].append(0)
 			except IndexError:
 				G[i].append(M1[i][j])
 	return G
 		
 
 def confluence(M1,M2):
-	if(M1 < M2):
-		M1,M2 = M2,M1
+
+	if(len(M1) < len(M2)):
+		M1, M2 = M2, M1
 	G = []
 	for i in range(len(M1)):
 		G.append([])
 		for j in range(len(M1[i])):
 			try:
-				G[i].append(M1[i][j] & M2[i][j])
+				if(M1[i][j] and M2[i][j]):
+					G[i].append(1)
+				else:
+					G[i].append(0)
+
 			except IndexError:
 				G[i].append(0)
 			
 	return G
 	
 def annularSum(M1,M2):
-	if(M1 < M2):
-		M1,M2 = M2,M1
+	if(len(M1) < len(M2)):
+		M1, M2 = M2, M1
+	print(len(M1))
+	print(len(M2))
 	G = []
 	for i in range(len(M1)):
 		G.append([])
@@ -89,21 +96,17 @@ def annularSum(M1,M2):
 				else:
 					G[i].append(0)
 			except IndexError:
-				if(M1[i][j] == 1):
-					G[i].append(1)
-				else:
-					G[i].append(0)
-			
+				G[i].append(M1[i][j])
 	return G
 
 
 CreateTwoMatrix()
 # Объединение графов
-G = combineGraphs(M1,M2)
+#G = combineGraphs(M1,M2)
 
 # Пересечение
-G = []
-G = confluence(M1,M2)
+#G = []
+#G = confluence(M1,M2)
 
 # Кольцевая сумма
 G = []
