@@ -1,18 +1,19 @@
 import random
-M1 = []
+G = []
 N1 = int(input("First Matrix: "))
 chance = [0,0,0,1,1,1,1,1,1,1]
+c = []
 for i in range(N1):
-	M1.append([])
+	G.append([])
 	for j in range(N1):
-		M1[i].append(random.choice(chance))
+		G[i].append(random.choice(chance))
 		if(i == j):
-			M1[i][j] = 0
+			G[i][j] = 0
 			
 for i in range(N1):
 	for j in range(N1):
-		M1[i][j] = M1[j][i]
-		print(M1[i][j],end='\t')
+		G[i][j] = G[j][i]
+		print(G[i][j],end='\t')
 	print('\n')
 print('\n'*3)
 
@@ -24,8 +25,8 @@ def BFS(v):
 		s = queue[0]
 		print(s+1)
 		queue.pop(0)
-		for i in range(len(M1)):
-			if(M1[s][i] == 1 and Vis[i] == 0):
+		for i in range(len(G)):
+			if(G[s][i] == 1 and Vis[i] == 0):
 				queue.append(i)
 				Vis[i] = 1
 
@@ -59,7 +60,7 @@ def BFS1(v1):
 v = int(input('Вершина : ')) - 1
 
 Vis = []
-for i in range(len(M1)):
+for i in range(len(G)):
 	Vis.append(0)
 
 

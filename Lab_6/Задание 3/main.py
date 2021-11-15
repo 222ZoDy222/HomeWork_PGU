@@ -19,7 +19,7 @@ for i in range(N1):
 print('\n'*3)
 
 def BFSD(v):
-    Vis[v] = 1
+    Vis[v] = 0
     queue.append(v)
     while(bool(queue)):
         s = queue[0]
@@ -43,7 +43,7 @@ print("\n")
 BFSD(v)
 
 for i in range(len(Vis)):
-    print(i+1 ,' : ' , Vis[i] - 1)
+    print(i+1 ,' : ' , Vis[i])
 
 print("---список смежности---")
 
