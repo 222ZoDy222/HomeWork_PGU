@@ -4,24 +4,15 @@ G = []
 c = []
 N1 = int(input("First Matrix: "))
 chance = [0,0,0,1,1,1,1,1,1,1]
-'''
 for i in range(N1):
     G.append([])
     for j in range(N1):
         G[i].append(random.choice(chance))
         if(i == j):
             G[i][j] = 0
-'''
-G = [
-[0,1,1,1,0],
-[1,0,0,1,0],
-[1,0,0,1,1],
-[1,1,1,0,1],
-[0,0,1,1,0]
-]
-
-for i in range(len(G)):
-    for j in range(len(G[i])):
+            
+for i in range(N1):
+    for j in range(N1):
         G[i][j] = G[j][i]
         print(G[i][j],end='\t')
     print('\n')
@@ -47,6 +38,8 @@ for i in range(len(G)):
 
 v = int(input('\nВершина : ')) - 1
 print("\n")
+
+
 BFSD(v)
 
 for i in range(len(Vis)):
@@ -92,8 +85,12 @@ res = []
 for i in range(len(G)):
     res.append(0)
 
-count = 0           
+count = 0
+print("\n Алгоритм поиска путей DFS :")
+start_time = time.time()            
 DFS(v)
+print("--- %s seconds ---" % (time.time() - start_time))
+
 print("\n")
 for i in range(len(res)):
     print(i+1,' : ' , res[i])
@@ -131,4 +128,27 @@ print("\n")
 for i in range(len(res)):
     print(i+1,' : ' , res[i])
 
+
+
+def BFS(v):
+    vis[v] = 1
+    queue.append(v)
+    while(bool(queue)):
+        s = queue[0]
+        print(s+1)
+        queue.pop(0)
+        for i in range(len(G)):
+            if(G[s][i] == 1 and vis[i] == 0):
+                queue.append(i)
+                vis[i] = 1
+
+
+v = int(input("\nВершина: ")) - 1
+vis = []
+for i in range(len(G)):
+    vis.append(0)
+
+queue = []
+
+BFS(v)
 
