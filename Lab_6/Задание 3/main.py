@@ -59,96 +59,86 @@ for i in range(len(G)):
 
 
 
-def DFS(v):
-    global count
-    count += 1
-    vis[v] = 1
+def DFS(v, count):
+    vis[v] = count
     for i in range(len(G)):
-        if(G[v][i] == 1 and vis[i] == 0):
-            DFS(i)
-        if(G[v][i] == 1):
-            res[i] = count
-    count -= 1
-    if(count > res[i]):
-        return
-    res[v] = count
+        if(G[v][i] == 1 and vis[i] == -1):
+            DFS(i,count + 1)
+        if(G[v][i] == 1 and vis[i] > count):
+            DFS(i,count + 1)
     
+
+
             
-
-
-
 v = int(input("\nВершина: ")) - 1
 vis = []
 for i in range(len(G)):
-    vis.append(0)
-res = []
-for i in range(len(G)):
-    res.append(0)
-
-count = 0
-print("\n Алгоритм поиска путей DFS :")
-start_time = time.time()            
-DFS(v)
-print("--- %s seconds ---" % (time.time() - start_time))
-
-print("\n")
-for i in range(len(res)):
-    print(i+1,' : ' , res[i])
-
-
-def DFS1(v):
-    global count
-    count += 1
-    vis[v] = 1
-    for i in range(len(c[v])):
-        if(vis[c[v][i]] == 0):
-            DFS(c[v][i])
-        res[c[v][i]] = count
-
-    count -= 1
-    if(count > res[c[v][i]]):
-        return
-    res[v] = count
-
-
-v = int(input("\nВершина: ")) - 1
-vis = []
-for i in range(len(G)):
-    vis.append(0)
-res = []
-for i in range(len(G)):
-    res.append(0)
+    vis.append(-1)
 
 count = 0           
+print("\n Алгоритм поиска путей DFS :")
+start_time = time.time()            
+DFS(v,count)
+print("--- %s seconds ---" % (time.time() - start_time))
+print("\n")
 
-
-DFS1(v)
 
 print("\n")
-for i in range(len(res)):
-    print(i+1,' : ' , res[i])
+for i in range(len(vis)):
+    print(i+1,' : ' , vis[i])
 
 
 
-def BFS(v):
-    vis[v] = 1
+def DFS1(v,count):
+    vis[v] = count
+    for i in range(len(c[v])):
+        if(vis[c[v][i]] == -1):
+            DFS(c[v][i],count + 1)
+        if(vis[c[v][i]] > count):
+            DFS(c[v][i],count + 1)
+
+
+v = int(input("\nВершина: ")) - 1
+
+for i in range(len(vis)):
+    vis[i] = -1
+count = 0           
+
+print("\n Алгоритм поиска путей DFS1 :")
+start_time = time.time()            
+DFS1(v,count)
+print("--- %s seconds ---" % (time.time() - start_time))
+print("\n")
+
+
+print("\n")
+for i in range(len(vis)):
+    print(i+1,' : ' , vis[i])
+
+
+def BFS(v,count):
+    vis[v] = count
     queue.append(v)
     while(bool(queue)):
+        count += 1
         s = queue[0]
-        print(s+1)
         queue.pop(0)
         for i in range(len(G)):
-            if(G[s][i] == 1 and vis[i] == 0):
+            if(G[s][i] == 1 and vis[i] == -1):
                 queue.append(i)
-                vis[i] = 1
+                vis[i] = count
+                
 
 
 v = int(input("\nВершина: ")) - 1
 vis = []
 for i in range(len(G)):
-    vis.append(0)
+    vis.append(-1)
 
 queue = []
+count = 0
+BFS(v,count)
 
-BFS(v)
-
+print("\n")
+for i in range(len(vis)):
+    print(i+1,' : ' , vis[i])
