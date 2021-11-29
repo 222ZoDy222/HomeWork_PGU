@@ -47,7 +47,7 @@ for i in range(N1):
 			
 for i in range(N1):
 	for j in range(N1):
-		if(orintation):
+		if(orintation == False):
 			G[i][j] = G[j][i]
 		print(G[i][j],end='\t')
 	print('\n')
@@ -79,10 +79,11 @@ BFS(v)
 
 for i in range(len(vis)):
 	if(vis[i] == sys.maxsize):
-		print("Вершина ", i, "изолированная")
+		print("Вершина ", i + 1, "изолированная")
 		vis[i] = 0
 	
 
+print("Расстояния от вершины ", v + 1 , "\n")
 for i in range(len(vis)):
 	print(vis[i], end=' ')
 
